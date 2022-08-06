@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+		<div class="row">
+			<div class="col">
+				<h1 class="mb-4">{{event.name}}</h1>
+				<dl class="row">
+					<dt class="col-sm-3">Title</dt>
+					<dd class="col-sm-9 mb-4">{{event.name}}</dd>
+
+					<dt class="col-sm-3">Date/time</dt>
+					<dd class="col-sm-9 mb-4">{{event.date | date}}</dd>
+
+					<dt class="col-sm-3">Description</dt>
+					<dd class="col-sm-9 mb-4">{{event.description}}</dd>
+					<dt class="col-sm-3 text-truncate">Type</dt>
+					<dd class="col-sm-9 mb-4">{{event.type}}</dd>
+					<dt class="col-sm-3 text-truncate">Capacity</dt>
+					<dd class="col-sm-9 mb-4">
+						{{event.capacity}}
+						people
+					</dd>
+					<dt class="col-sm-3 text-truncate">Contact email</dt>
+					<dd class="col-sm-9 mb-4">{{event.contactEmail}}</dd>
+
+					<dt class="col-sm-3 text-truncate">Phone</dt>
+					<dd class="col-sm-9 mb-4">{{event.phone}}</dd>
+					<dt class="col-sm-3 text-truncate">Address</dt>
+					<dd class="col-sm-9 mb-4">{{event.address}}</dd>
+					<dt class="col-sm-3 text-truncate">Link</dt>
+					<dd class="col-sm-9 mb-4">
+						<a target="_blank" href="{{event.url}}" class="btn btn-info">Go to the link of "{{event.name}}"
+						</a>
+					</dd>
+				</dl>
+			</div>
+			<div class="col">
+				<img src="{{event.image}}" class="img-fluid rounded float-end" alt="{{event.name}}"/>
+			</div>
+		</div>
+
+		<a class="btn btn-dark" href="{{path('app_event')}}">Back to home</a>
+	</div>
+{% endblock %}

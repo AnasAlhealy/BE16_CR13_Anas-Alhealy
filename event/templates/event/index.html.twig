@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EventController!
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+
+
+		<div class="d-flex justify-content-between">
+			<div class="me-auto">
+				<h1 class="mb-4 fw-bold">Welcome To Events</h1>
+				<p class="text-muted">
+					To See More Details Click Any Picture Envent
+				</p>
+			</div>
+			<div class="me-3">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Filter by type
+						{{ type }}
+					</button>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="{{ path('app_event') }}">All</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_event', {type: 'movie'}) }}">Movie</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_event', {type: 'sport'}) }}">Sport</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_event', {type: 'music'}) }}">Music</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_event', {type: 'theater'}) }}">Theater</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<a href="{{ path('app_event_create') }}" class="btn btn-primary float-end">
+					<i class="bi bi-plus-lg"></i>
+					Add new event
+				</a>
+			</div>
+		</div>
+
+
+		<div class="row row-cols-3 g-3">
+			{% for event in events %}
+				<div class="col">
+
+					<div class="card mb-3">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<a href="{{ path('app_event_details', {id: event.id}) }}">
+									<img src="{{event.image}}" class="img-fluid rounded-start" alt="{{event.name}}">
+								</a>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title fw-bold">{{event.name}}</h5>
+									<p class="card-text">{{event.description}}</p>
+									<p class="card-text">
+										<div>
+											<i class="bi bi-star-fill me-2"></i>
+											<small class="text-muted">{{ event.type }}</small>
+										</div>
+										<div>
+											<i class="bi bi-people-fill me-2"></i>
+											<small class="text-muted">{{ event.capacity }}</small>
+										</div>
+										<div>
+											<i class="bi bi-calendar-event me-2"></i>
+											<small class="text-muted">{{ event.date | date }}</small>
+										</div>
+									</p>
+									<a href="{{ path('app_event_edit', {id: event.id}) }}" class="card-link btn btn-sm btn-warning">
+										<i class="bi bi-pencil-square me-2"></i>
+										Edit
+									</a>
+									<a href="{{ path('app_event_delete', {id: event.id}) }}" class="card-link btn btn-sm btn-danger">
+										<i class="bi bi-trash3 me-2"></i>
+										Delete
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
